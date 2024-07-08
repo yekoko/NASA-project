@@ -14,7 +14,7 @@ describe("Launches Api", () => {
   describe("Test GET /launches", () => {
     test("It should response with 200 success", async () => {
       const response = await request(app)
-        .get("/launches")
+        .get("/v1/launches")
         .expect("Content-Type", /json/)
         .expect(200);
     });
@@ -43,7 +43,7 @@ describe("Launches Api", () => {
 
     test("It should response with 201 created", async () => {
       const response = await request(app)
-        .post("/launches")
+        .post("/v1/launches")
         .send(testLaunchData)
         .set("Accept", "application/json")
         .expect("Content-Type", /json/)
@@ -59,7 +59,7 @@ describe("Launches Api", () => {
 
     test("It should catch missing require properties", async () => {
       const response = await request(app)
-        .post("/launches")
+        .post("/v1/launches")
         .send(testLaunchDataWithoutDate)
         .set("Accept", "application/json")
         .expect("Content-Type", /json/)
@@ -72,7 +72,7 @@ describe("Launches Api", () => {
 
     test("It should catch invalid date format", async () => {
       const response = await request(app)
-        .post("/launches")
+        .post("/v1/launches")
         .send(testLaunchDataWithInvalidDate)
         .set("Accept", "application/json")
         .expect("Content-Type", /json/)
@@ -89,11 +89,11 @@ describe("Launches Api", () => {
       ok: true,
     };
     test("It should response with 200 success", async () => {
-      const response = await request(app).delete(`/launches/100`).expect(200);
+      const response = await request(app).delete(`/v1/launches/100`).expect(200);
       expect(response.body).toMatchObject(testLaunchDeleteData);
     });
     test("It should catch launch not found", async () => {
-      const response = await request(app).delete(`/launches/1012`).expect(400);
+      const response = await request(app).delete(`/v1/launches/1012`).expect(400);
       expect(response.body).toStrictEqual({
         error: "Launch not found!",
       });

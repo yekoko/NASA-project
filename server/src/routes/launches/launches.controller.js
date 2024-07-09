@@ -5,8 +5,12 @@ const {
   deleteLaunchById,
 } = require("../../models/launches.model");
 
+const { getPagination } = require("../../services/query");
+
 async function httpGetAllLaunches(req, res) {
-  return res.status(200).json(await getAllLaunches());
+  const { skip, limit } = getPagination(req.query);
+  const launches = await getAllLaunches(skip, limit);
+  return res.status(200).json(launches);
 }
 
 async function httpAddNewLaunch(req, res) {
@@ -49,7 +53,7 @@ async function httpDeleteLaunch(req, res) {
     });
   }
   return res.status(200).json({
-    ok: true
+    ok: true,
   });
 }
 

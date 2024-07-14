@@ -47,6 +47,7 @@ async function httpDeleteLaunch(req, res) {
     });
   }
   const deleted = await deleteLaunchById(launchId);
+  
   if (!deleted) {
     return res.status(400).json({
       error: "Launch not deleted!",

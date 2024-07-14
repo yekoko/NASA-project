@@ -1,10 +1,12 @@
 const request = require("supertest");
 const app = require("../../app");
 const { mongoConnect, mongoDisconnect } = require("../../services/mongo");
+const { loadPlanetsData } = require("../../models/planets.model");
 
 describe("Launches Api", () => {
   beforeAll(async () => {
     await mongoConnect();
+    await loadPlanetsData();
   });
 
   afterAll(async () => {
@@ -89,11 +91,15 @@ describe("Launches Api", () => {
       ok: true,
     };
     test("It should response with 200 success", async () => {
-      const response = await request(app).delete(`/v1/launches/100`).expect(200);
+      const response = await request(app)
+        .delete(`/v1/launches/206`)
+        .expect(200);
       expect(response.body).toMatchObject(testLaunchDeleteData);
     });
     test("It should catch launch not found", async () => {
-      const response = await request(app).delete(`/v1/launches/1012`).expect(400);
+      const response = await request(app)
+        .delete(`/v1/launches/1012`)
+        .expect(400);
       expect(response.body).toStrictEqual({
         error: "Launch not found!",
       });

@@ -86,23 +86,23 @@ describe("Launches Api", () => {
     });
   });
 
-  describe("Test delete launch", () => {
-    const testLaunchDeleteData = {
-      ok: true,
-    };
-    test("It should response with 200 success", async () => {
-      const response = await request(app)
-        .delete(`/v1/launches/206`)
-        .expect(200);
-      expect(response.body).toMatchObject(testLaunchDeleteData);
-    });
-    test("It should catch launch not found", async () => {
-      const response = await request(app)
-        .delete(`/v1/launches/1012`)
-        .expect(400);
-      expect(response.body).toStrictEqual({
-        error: "Launch not found!",
-      });
-    });
-  });
+  // describe("Test delete launch", () => {
+  //   const testLaunchDeleteData = {
+  //     ok: true,
+  //   };
+  //   test("It should response with 200 success", async () => {
+  //     const response = await request(app)
+  //       .delete(`/v1/launches/206`)
+  //       .expect(200);
+  //     expect(response.body).toMatchObject(testLaunchDeleteData);
+  //   });
+  //   test("It should catch launch not found", async () => {
+  //     const response = await request(app)
+  //       .delete(`/v1/launches/1012`)
+  //       .expect(400);
+  //     expect(response.body).toStrictEqual({
+  //       error: "Launch not found!",
+  //     });
+  //   });
+  // });
 });

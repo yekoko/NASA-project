@@ -16,10 +16,13 @@
     "testEnvironment": "node"
   },
   "dependencies": {
+    "axios": "^1.7.2",
     "cors": "^2.8.5",
     "csv-parse": "^5.5.6",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "mongoose": "^8.5.1",
+    "morgan": "^1.10.0",
     "pm2": "^5.4.1"
   },
   "devDependencies": {
